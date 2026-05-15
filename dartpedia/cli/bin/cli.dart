@@ -1221,20 +1221,35 @@ Future<String> getWikipediaArticle(String articleTitle) async { /* ... existing 
 
 -------------------------------------------------------------------------------
 
+Versao: 0.0.14
 
+Data: 15/05/2026
 
-*/
+Descrição:
+Importar e usar o command_runnerpacote
+#
+Agora que você adicionou command_runnera classe como dependência, pode importá-la para sua cliaplicação e substituir a lógica de tratamento de argumentos existente pela nova CommandRunnerclasse. Esta etapa também corrige o comportamento de encerramento do programa discutido no final do Capítulo 3.
 
+Abra o cli/bin/cli.dartarquivo.
+
+Adicione a seguinte declaração de importação no início do arquivo, junto com suas outras importações:
+
+import 'package:command_runner/command_runner.dart';
+Esta declaração importa o command_runnerpacote, tornando a CommandRunnerclasse disponível para uso.
+
+Refatore a mainfunção e remova a lógica antiga: Atualmente, sua mainfunção do Capítulo 3 lida diretamente com comandos como version`command`, help`command` e wikipedia`command`, e então chama `command` searchWikipedia. Agora você substituirá toda essa lógica personalizada de tratamento de comandos por uma única chamada à nova CommandRunnerclasse.
+
+Seu cli/bin/cli.dartarquivo (do Capítulo 3) deve estar assim:
 
 import 'dart:io';
-
 import 'package:http/http.dart' as http;
+import 'package:command_runner/command_runner.dart';
 
-const version = '0.0.13';
+const version = '0.0.1';
 
 void main(List<String> arguments) {
   if (arguments.isEmpty || arguments.first == 'help') {
-        printUsage();
+    printUsage();
   } else if (arguments.first == 'version') {
     print('Dartpedia CLI version $version');
   } else if (arguments.first == 'wikipedia') {
@@ -1245,44 +1260,118 @@ void main(List<String> arguments) {
   }
 }
 
-void searchWikipedia(List<String>? arguments) async {
-    final String articleTitle;
-    if (arguments == null || arguments.isEmpty) {
-      print('Please provide an article title.');
-      final inputFromStdin = stdin.readLineSync();
-      if (inputFromStdin == null || inputFromStdin.isEmpty) {
-        print('No article title provided. Existing.');
-        return;
-      }
-      articleTitle = inputFromStdin;
-    } else {
-      articleTitle = arguments.join(' ');
-}
+void searchWikipedia(List<String>? arguments) async { /* ... existing logic ... */ }
+void printUsage() { /* ... existing logic ... */ }
+Future<String> getWikipediaArticle(String articleTitle) async { /* ... existing logic ... */ }
 
-    print('Looking up articles about "$articleTitle". Please wait.');
-    print('Here ya go!');
-    print('(Pretend this is an article title about "$articleTitle")');
+Codigo:
 
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:command_runner/command_runner.dart';
 
- var articleContent = await getWikipediaArticle(articleTitle);
- print(articleContent); // Print the full article response (raw JSON for now)
-}
+const version = '0.0.1';
 
-void printUsage() {
-  print("The following commands are valid: 'help', 'version', 'search <ARTICLE-TITLE>'");
-}
-
-Future<String> getWikipediaArticle(String articleTitle) async {
-  final url = Uri.https(
-    'en.wikipedia.org',
-    '/api/rest_v1/page/summary/$articleTitle',
-  );
-  final response = await http.get(url); // Make the HTTP request
-
-  if (response.statusCode == 200) {
-    return response.body; // Return the response body if successful
+void main(List<String> arguments) {
+  if (arguments.isEmpty || arguments.first == 'help') {
+    printUsage();
+  } else if (arguments.first == 'version') {
+    print('Dartpedia CLI version $version');
+  } else if (arguments.first == 'wikipedia') {
+    final inputArgs = arguments.length > 1 ? arguments.sublist(1) : null;
+    searchWikipedia(inputArgs);
+  } else {
+    printUsage();
   }
+}
 
-  // Return an error message if the request failed
-  return 'Error: Failed to fetch article "$articleTitle". Status code: ${response.statusCode}';
+void searchWikipedia(List<String>? arguments) async { /* ... existing logic ... */ }
+void printUsage() { /* ... existing logic ... */ }
+Future<String> getWikipediaArticle(String articleTitle) async { /* ... existing logic ... */ }
+
+Saida padrao ao executar o codigo:
+
+// Comando: dart run
+
+// Saida:
+dart run bin/main.dart
+
+Saída: Ele chamará a função printUsage(). 
+
+2. Se o primeiro argumento for help
+Comando: dart run bin/main.dart help
+
+Saída: Também chamará printUsage().
+
+3. Se o primeiro argumento for version
+Comando: dart run bin/main.dart version
+
+Saída: ```text
+Dartpedia CLI version 0.0.14
+
+
+4. Se o primeiro argumento for wikipedia
+Comando: dart run bin/main.dart wikipedia flutter
+
+Saída: Ele chamará a função searchWikipedia(['flutter']). A saída dependerá da lógica interna dessa função e da resposta da API do Wikipedia.
+
+
+5. Se você digitar qualquer outra coisa
+Comando: dart run bin/main.dart abobora
+
+Saída: Chamará printUsage().
+
+-------------------------------------------------------------------------------
+
+Versao: 0.0.15
+
+Data: 15/05/2026
+
+Descrição:
+
+Agora, substitua todo o conteúdo cli/bin/cli.dart (exceto a httpimportação) pela seguinte versão atualizada:
+
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:command_runner/command_runner.dart';
+
+void main(List<String> arguments) async { // main is now async and awaits the runner
+  var runner = CommandRunner(); // Create an instance of your new CommandRunner
+  await runner.run(arguments); // Call its run method, awaiting its Future<void>
+}
+
+
+Codigo:
+
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:command_runner/command_runner.dart';
+
+void main(List<String> arguments) async { // main is now async and awaits the runner
+  var runner = CommandRunner(); // Create an instance of your new CommandRunner
+  await runner.run(arguments); // Call its run method, awaiting its Future<void>
+}
+
+
+Saida padrao ao executar o codigo:
+
+Comando: dart run
+
+Saida: CommandRunner received arguments: []
+
+Comando: dart run bin/cli.dart wikipedia Computer_programming
+
+Saida: CommandRunner received arguments: [wikipedia, Computer_programming]
+
+------------------------------------------------------------------------------p
+
+*/
+
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:command_runner/command_runner.dart';
+
+void main(List<String> arguments) async { // main is now async and awaits the runner
+  var runner = CommandRunner(); // Create an instance of your new CommandRunner
+  await runner.run(arguments); // Call its run method, awaiting its Future<void>
 }
