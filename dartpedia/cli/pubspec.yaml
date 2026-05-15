@@ -1,0 +1,195 @@
+#version: 1.0.0
+# repository: https://github.com/my_org/my_repo
+
+#environment:
+#  sdk: ^3.11.3
+
+# Add regular dependencies here.
+#dependencies:
+#  path: ^1.9.0
+#  http: ^1.3.0  
+
+#dev_dependencies:
+#  lints: ^6.0.0
+#  test: ^1.25.6
+
+# Saida padrao ao executar o codigo:
+#
+# Comando: dart pub get // Na primeira vez
+#
+# Saida: Resolving dependencies...
+# Downloading packages ...
+# _fe_analyzer shared 99.0.0 (100.0.0 available)
+# analyzer 12.1.0 (13.0.0 available)
+# + http 1.6.0
+# matcher 0.12.19 (0.12.20 available)
+#------------------------------------------------------------------------------
+#
+# Informacoes:
+#
+# O aplicativo cli faz parte do projeto dartpedia
+# O cli eh o nosso primeiro aplicativo desenvolvido  usando Dart
+# pubspec.yaml - fica localizado na pasta dartpedia/ em /dartpedia/cli
+#
+# Outras informacoes importantes sobre o cli, nosso aplicativo:
+#
+# Site        :
+# Autor       : Natan do Carmo Silva <natan.do.carmo.ndc@gmail.com>
+# manutencao  :
+#
+# -----------------------------------------------------------------------------
+#
+# Funcionamento:
+#
+# Inicialmente o cli, ao ser executado, realiza uma requisicao HTTP para buscar e exibir o resumo de um artigo utilizando o pacote HTTP.
+# Dentro da pasta dartpedia em home/nome.dobrenome/dartpedia/cli rode o comando dart pub get: deve ser feita  ainstalacao das dependencias do projeto e o pacote HTTP ficara disponivel para uso do aplicativo
+#
+# Obs. Importante:
+#
+# Este aplicativo esta em desenvolvimento e ao longo do tempo o comportamento do aplicativo pode mudar.
+#
+# -----------------------------------------------------------------------------
+#
+# Dicionario do versionamento:
+#
+# V = Versao
+# 0 = Inicio do versionamento
+# . = Implementacao do versionamento
+# 1 = Proxima versao, 2, rpoxima versao, e assim por diante
+#
+# -----------------------------------------------------------------------------
+#
+# Historico de versionamento:
+#
+# -----------------------------------------------------------------------------
+#
+# Versao 0.0.0
+#
+# Data: 24/04/2026
+#
+# Descricao do codigo: Codigo original ...
+#
+# Codigo:
+#
+#name: cli
+#description: A sample command-line application.
+#version: 1.0.0
+#repository: https://github.com/my_org/my_repo
+#
+#environment:
+# sdk: ^3.11.3
+
+    # ADD regular dependencies here.
+    #dependencies:
+    #path: ^1.9.0
+#
+#dev_dependencies:
+# lints: ^6.0.0
+# test: ^1.25.6
+#
+# Saida padrao ao executar o codigo:
+#
+# Comando: dart pub get
+# Saida: Resolving dependencies...
+# Downloading packages...
+# fe analyzer shared 98.0.0 (100.0.0 available)
+# analyzer 12.0.0 (13.0.0 available)
+# vn_service 15.0.2 (15.0.0 available)
+# Got dependencies!
+# 3 packages have newer versions incompatible with dependency constraints.
+# Try 'dart pub outdated for more information.'
+#
+# -----------------------------------------------------------------------------
+#
+# Versao: 0.0.l
+#
+# Data: 26/04/2026
+#
+# Descricao do código:
+#
+#Antes de poder fazer requisições HTTP, você precisa adicionar o httppacote como uma dependência ao seu projeto.
+#
+#Abra o dartpedia/cli/pubspec.yamlarquivo dentro do seu projeto. Este arquivo se chama pubspec e gerencia os metadados, as dependências (como o httppacote) e os recursos do seu projeto Dart.
+#
+#Localize a dependenciesseção.
+#
+#Adicione http: ^1.3.0(ou a versão estável mais recente) em dependencies. O ^símbolo permite que versões compatíveis sejam usadas.
+#
+#dependencies:
+# http: ^1.3.0
+#Salve o pubspec.yamlarquivo.
+#
+#Execute o comando dart pub getno seu terminal a partir do dartpedia/clidiretório. Este comando busca a dependência recém-adicionada e a disponibiliza para uso no seu projeto.
+#
+#Você deverá ver uma saída semelhante a esta:
+#
+#Resolving dependencies...
+#Downloading packages...
+#+ http 1.4.0
+# lints 5.1.1 (6.0.0 available)
+#Changed 1 dependency!
+#1 package has newer versions incompatible with dependency constraints.
+#Try `dart pub outdated` for more information.
+#
+# Codigo:
+
+#name: cli
+#description: A sample command-line application.
+#version: 1.0.0
+# repository: https://github.com/my_org/my_repo
+
+#environment:
+#  sdk: ^3.11.3
+
+# Add regular dependencies here.
+#dependencies:
+#  path: ^1.9.0
+#  http: ^1.3.0  
+
+#dev_dependencies:
+#  lints: ^6.0.0
+#  test: ^1.25.6
+
+# Saida padrao ao executar o codigo:
+#
+# Comando: dart pub get // Na primeira vez
+#
+# Saida: Resolving dependencies...
+# Downloading packages ...
+# _fe_analyzer shared 99.0.0 (100.0.0 available)
+# analyzer 12.1.0 (13.0.0 available)
+# + http 1.6.0
+# matcher 0.12.19 (0.12.20 available)
+# test 1.31.0 (1.31.1 available)
+# test api 0.7.11 (0.7.12 available)
+# test core 0.6.17 (0.6.18 available)
+# Got dependencies!
+# 6 packages  have newer versions incompatible with dependency constraints.
+# Try 'dart pub outdated' for more information.
+# -----------------------------------------------------------------------------
+#
+# Codigo valido ate aqui:
+#
+# Codigo:
+#
+name: cli
+publish_to: --pub-dev
+description: A sample command-line application
+version: 1.1.0
+repository: https://github.com/my_org/my_repo
+
+environment:
+  sdk:   ^3.11.3
+
+dependencies:
+  http: ^1.3.0 # Keep your existing http dependency
+  command_runner:
+  path: ../command_runner # Points to your local command_runner package
+
+command_runner:
+  path: ../command_runner # Points to your local command_runner package
+
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.25.6
