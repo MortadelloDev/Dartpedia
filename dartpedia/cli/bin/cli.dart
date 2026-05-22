@@ -1325,53 +1325,48 @@ Saída: Chamará printUsage().
 
 Versao: 0.0.15
 
-Data: 15/05/2026
+Data: 22/05/2026
 
-Descrição:
+Descrição: 
+gora que você adicionou command_runnera classe como dependência, pode importá-la para sua cliaplicação e substituir a lógica de tratamento de argumentos existente pela nova CommandRunnerclasse. Esta etapa também corrige o comportamento de encerramento do programa discutido no final do Capítulo 3.
 
-Agora, substitua todo o conteúdo cli/bin/cli.dart (exceto a httpimportação) pela seguinte versão atualizada:
+Abra o cli/bin/cli.dartarquivo.
+
+Adicione a seguinte declaração de importação no início do arquivo, junto com suas outras importações:
+
+import 'package:command_runner/command_runner.dart';
+Esta declaração importa o command_runnerpacote, tornando a CommandRunnerclasse disponível para uso.
+
+Refatore a mainfunção e remova a lógica antiga: Atualmente, sua mainfunção do Capítulo 3 lida diretamente com comandos como version`command`, help`command` e wikipedia`command`, e então chama `command` searchWikipedia. Agora você substituirá toda essa lógica personalizada de tratamento de comandos por uma única chamada à nova CommandRunnerclasse.
+
+Codigo
 
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:command_runner/command_runner.dart';
 
+const version = '0.0.1';
 void main(List<String> arguments) async { // main is now async and awaits the runner
   var runner = CommandRunner(); // Create an instance of your new CommandRunner
   await runner.run(arguments); // Call its run method, awaiting its Future<void>
 }
 
+Saida padrão:
 
-Codigo:
+Comando: dart run cli.dart wikipedia Computer_programming   
+Sadia: CommandRunner received arguments: [wikipedia, Computer_programming]
 
-import 'dart:io';
-import 'package:http/http.dart' as http;
-import 'package:command_runner/command_runner.dart';
-
-void main(List<String> arguments) async { // main is now async and awaits the runner
-  var runner = CommandRunner(); // Create an instance of your new CommandRunner
-  await runner.run(arguments); // Call its run method, awaiting its Future<void>
-}
-
-
-Saida padrao ao executar o codigo:
-
-Comando: dart run
-
-Saida: CommandRunner received arguments: []
-
-Comando: dart run bin/cli.dart wikipedia Computer_programming
-
-Saida: CommandRunner received arguments: [wikipedia, Computer_programming]
-
-------------------------------------------------------------------------------p
-
+------------------------------------------------------------------------------
 */
 
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:command_runner/command_runner.dart';
 
+const version = '0.0.15';
+
 void main(List<String> arguments) async { // main is now async and awaits the runner
   var runner = CommandRunner(); // Create an instance of your new CommandRunner
   await runner.run(arguments); // Call its run method, awaiting its Future<void>
 }
+
