@@ -1369,7 +1369,46 @@ void main(List<String> arguments) async { // main is now async and awaits the ru
   var runner = CommandRunner(); // Create an instance of your new CommandRunner
   await runner.run(arguments); // Call its run method, awaiting its Future<void>
 }
+-------------------------------------------------------------------------------
 
+Data: 30/05/26
+
+Versão: 0.0.16
+
+Descrição: Atualize o arquivo cli.dart para usar o novo CommandRunner.
+
+Código:
+import 'package:command_runner/command_runner.dart';
+
+const version = '0.0.16';
+
+void main(List<String> arguments) {
+  var commandRunner = CommandRunner()..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+
+Saida padrão ao executar o codigo:
+
+Comando: dart run cli.dart
+
+Saida:
+Unhandled exception:
+Bad state: No element
+#0      _Array.first (dart:core-patch/array.dart:52:5)
+#1      CommandRunner.parse (package:command_runner/src/command_runner_base.dart:28:39)
+#2      CommandRunner.run (package:command_runner/src/command_runner_base.dart:13:32)
+#3      main (file:///home/natan_c_silva/my_project/My_project/dartpedia/cli/bin/cli.dart:1403:17)
+#4      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)
+#5      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)
+
+Comando: dart run cli.dart help
+
+Saida:
+
+Usage: dart bin/cli.dart <command> [commandArg?] [...options?]
+ help:  Prints usage information to the command line.
+
+[------------------------------------------------------------------------------
 */
 import 'package:command_runner/command_runner.dart';
 
