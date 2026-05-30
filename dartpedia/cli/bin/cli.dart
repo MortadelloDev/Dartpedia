@@ -1171,9 +1171,9 @@ void main(List<String> arguments) {
   }
 }
 
-void searchWikipedia(List<String>? arguments) async { /* ... existing logic ... */ }
-void printUsage() { /* ... existing logic ... */ }
-Future<String> getWikipediaArticle(String articleTitle) async { /* ... existing logic ... */ }
+//void searchWikipedia(List<String>? arguments) async {  ... existing logic ...  }
+//void printUsage() {  ... existing logic ...  }
+//Future<String> getWikipediaArticle(String articleTitle) async {  ... existing logic ...  }
 Agora, substitua todo o conteúdo cli/bin/cli.dart (exceto a httpimportação) pela seguinte versão atualizada:
 
 import 'dart:io';
@@ -1215,9 +1215,9 @@ void main(List<String> arguments) {
   }
 }
 
-void searchWikipedia(List<String>? arguments) async { /* ... existing logic ... */ }
-void printUsage() { /* ... existing logic ... */ }
-Future<String> getWikipediaArticle(String articleTitle) async { /* ... existing logic ... */ }
+void searchWikipedia(List<String>? arguments) async {  ... existing logic ...  }
+void printUsage() {  ... existing logic ...  }
+Future<String> getWikipediaArticle(String articleTitle) async {  ... existing logic ...  }
 
 -------------------------------------------------------------------------------
 
@@ -1245,7 +1245,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:command_runner/command_runner.dart';
 
-const version = '0.0.1';
+const version = '0.0.14';
 
 void main(List<String> arguments) {
   if (arguments.isEmpty || arguments.first == 'help') {
@@ -1260,9 +1260,9 @@ void main(List<String> arguments) {
   }
 }
 
-void searchWikipedia(List<String>? arguments) async { /* ... existing logic ... */ }
-void printUsage() { /* ... existing logic ... */ }
-Future<String> getWikipediaArticle(String articleTitle) async { /* ... existing logic ... */ }
+void searchWikipedia(List<String>? arguments) async {  ... existing logic ...  }
+void printUsage() {  ... existing logic ...  }
+Future<String> getWikipediaArticle(String articleTitle) async {  ... existing logic ...  }
 
 Codigo:
 
@@ -1270,7 +1270,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:command_runner/command_runner.dart';
 
-const version = '0.0.1';
+const version = '0.0.14';
 
 void main(List<String> arguments) {
   if (arguments.isEmpty || arguments.first == 'help') {
@@ -1285,9 +1285,9 @@ void main(List<String> arguments) {
   }
 }
 
-void searchWikipedia(List<String>? arguments) async { /* ... existing logic ... */ }
-void printUsage() { /* ... existing logic ... */ }
-Future<String> getWikipediaArticle(String articleTitle) async { /* ... existing logic ... */ }
+void searchWikipedia(List<String>? arguments) async {  ... existing logic ...  }
+void printUsage() {  ... existing logic ...  }
+Future<String> getWikipediaArticle(String articleTitle) async {  ... existing logic ...  }
 
 Saida padrao ao executar o codigo:
 
@@ -1371,7 +1371,6 @@ void main(List<String> arguments) async { // main is now async and awaits the ru
 }
 
 */
--------------------------------------------------------------------------------
 import 'package:command_runner/command_runner.dart';
 
 const version = '0.0.16';
