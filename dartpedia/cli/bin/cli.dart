@@ -1357,7 +1357,7 @@ Comando: dart run cli.dart wikipedia Computer_programming
 Sadia: CommandRunner received arguments: [wikipedia, Computer_programming]
 
 ------------------------------------------------------------------------------
-*/
+
 
 import 'dart:io';
 import 'package:http/http.dart' as http;
@@ -1370,3 +1370,13 @@ void main(List<String> arguments) async { // main is now async and awaits the ru
   await runner.run(arguments); // Call its run method, awaiting its Future<void>
 }
 
+*/
+-------------------------------------------------------------------------------
+import 'package:command_runner/command_runner.dart';
+
+const version = '0.0.16';
+
+void main(List<String> arguments) {
+  var commandRunner = CommandRunner()..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
