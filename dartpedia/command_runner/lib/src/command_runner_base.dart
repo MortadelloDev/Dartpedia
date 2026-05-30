@@ -1,6 +1,10 @@
+
+
+
 import 'dart:collection';
 import 'dart:io';
 import 'arguments.dart';
+
 
 class CommandRunner {
   final Map<String, Command> _commands = <String, Command>{};
@@ -40,11 +44,6 @@ class CommandRunner {
 /// Support for doing something awesome.
 ///
 /// More dartdocs go here.
-library;
-
-export 'src/arguments.dart';
-export 'src/command_runner_base.dart';
-export 'src/help_command.dart';
 
 // TODO: Export any libraries intended for clients of this package.
 
