@@ -1409,12 +1409,58 @@ Usage: dart bin/cli.dart <command> [commandArg?] [...options?]
  help:  Prints usage information to the command line.
 
 [------------------------------------------------------------------------------
-*/
+
+Versão: 0.0.17
+
+Data: 30/06/26
+
+Descrição: tualize o arquivo cli.dart para usar o novo tratamento de erros.
+#
+Modifique cli/bin/cli.dartpara usar o novo tratamento de erros em CommandRunner.
+
+Abra o cli/bin/cli.dartarquivo.
+
+Atualize a mainfunção para passar uma onErrorfunção para o CommandRunner:
+
+Codigo:
+
 import 'package:command_runner/command_runner.dart';
 
-const version = '0.0.16';
+const version = '0.0.17';
 
 void main(List<String> arguments) {
-  var commandRunner = CommandRunner()..addCommand(HelpCommand());
+  // [Step 6 update] Add onError method
+  var commandRunner = CommandRunner(
+    onError: (Object error) {
+      if (error is Error) {
+        throw error;
+      }
+      if (error is Exception) {
+        print(error);
+      }
+    },
+  )..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+
+-------------------------------------------------------------------------------
+*/
+
+import 'package:command_runner/command_runner.dart';
+
+const version = '0.0.17';
+
+void main(List<String> arguments) {
+  // [Step 6 update] Add onError method
+  var commandRunner = CommandRunner(
+    onError: (Object error) {
+      if (error is Error) {
+        throw error;
+      }
+      if (error is Exception) {
+        print(error);
+      }
+    },
+  )..addCommand(HelpCommand());
   commandRunner.run(arguments);
 }
