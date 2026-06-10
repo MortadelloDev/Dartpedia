@@ -1444,15 +1444,48 @@ void main(List<String> arguments) {
 }
 
 -------------------------------------------------------------------------------
+
+Data: 10/06/26
+
+Versão: 0.0.18
+
+Descrição: Atualize a mainfunção para passá-la onOutputpara o CommandRunner. Você
+também precisará adicionar uma importação para console.dart tornar a writefunção disponível.
+
+Código:
+
+import 'package:command_runner/command_runner.dart';
+
+const version = '0.0.18';
+
+void main(List<String> arguments) {
+  var commandRunner = CommandRunner(
+    onOutput: (String output) async {
+      await write(output);
+    },
+    onError: (Object error) {
+      if (error is Error) {
+        throw error;
+      }
+      if (error is Exception) {
+        print(error);
+      }
+    },
+  )..addCommand(HelpCommand());
+  commandRunner.run(arguments);
+}
+-------------------------------------------------------------------------------
 */
 
 import 'package:command_runner/command_runner.dart';
 
-const version = '0.0.17';
+const version = '0.0.18';
 
 void main(List<String> arguments) {
-  // [Step 6 update] Add onError method
   var commandRunner = CommandRunner(
+    onOutput: (String output) async {
+      await write(output);
+    },
     onError: (Object error) {
       if (error is Error) {
         throw error;
