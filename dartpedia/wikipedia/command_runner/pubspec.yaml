@@ -1,4 +1,4 @@
-name: wikipedia
+name: command_runner
 description: A sample command-line application.
 version: 1.0.0
 #resolution: workspace # Add this line
