@@ -1476,26 +1476,42 @@ void main(List<String> arguments) {
 }
 -------------------------------------------------------------------------------
 
+Versão: 0.0.19
 
+Data: 10/06/26
+
+Descrição: Agora, utilize a initFileLoggerfunção cli/bin/cli.dartpara criar uma instância de logger e registrar mensagens em um arquivo.
+
+Código:
+import 'dart:io';
+import 'package:cli/cli.dart';
 import 'package:command_runner/command_runner.dart';
 
-const version = '0.0.18';
+void main(List<String> arguments) async {
+  // Inicializa o logger para registrar falhas
+  final errorLogger = initFileLogger('errors');
 
-void main(List<String> arguments) {
-  var commandRunner = CommandRunner(
+  final app = CommandRunner(
     onOutput: (String output) async {
-      await write(output);
+      print(output); // Imprime a saída normal no console
     },
     onError: (Object error) {
       if (error is Error) {
+        errorLogger.severe(
+          '[Error] ${error.toString()}\n${error.stackTrace}',
+        );
         throw error;
       }
       if (error is Exception) {
-        print(error);
+        errorLogger.warning(error);
       }
     },
-  )..addCommand(HelpCommand());
-  commandRunner.run(arguments);
+  )
+    ..addCommand(HelpCommand())
+    ..addCommand(SearchCommand(logger: errorLogger))
+    ..addCommand(GetArticleCommand(logger: errorLogger));
+
+  await app.run(arguments);
 }
 -------------------------------------------------------------------------------
 */
