@@ -1499,32 +1499,34 @@ void main(List<String> arguments) {
 }
 -------------------------------------------------------------------------------
 */
+
+import 'dart:io';
 import 'package:cli/cli.dart';
 import 'package:command_runner/command_runner.dart';
 
 void main(List<String> arguments) async {
+  // Inicializa o logger para registrar falhas
   final errorLogger = initFileLogger('errors');
-  final app =
-      CommandRunner(
-          onOutput: (String output) async {
-            await write(output);
-          },
-          onError: (Object error) {
-            if (error is Error) {
-              errorLogger.severe(
-                '[Error] ${error.toString()}\n${error.stackTrace}',
-              );
-              throw error;
-            }
-            if (error is Exception) {
-              errorLogger.warning(error);
-            }
-          },
-        )
-        ..addCommand(HelpCommand())
-        ..addCommand(SearchCommand(logger: errorLogger))
-        ..addCommand(GetArticleCommand(logger: errorLogger));
 
-  app.run(arguments);
+  final app = CommandRunner(
+    onOutput: (String output) async {
+      print(output); // Imprime a saída normal no console
+    },
+    onError: (Object error) {
+      if (error is Error) {
+        errorLogger.severe(
+          '[Error] ${error.toString()}\n${error.stackTrace}',
+        );
+        throw error;
+      }
+      if (error is Exception) {
+        errorLogger.warning(error);
+      }
+    },
+  )
+    ..addCommand(HelpCommand())
+    ..addCommand(SearchCommand(logger: errorLogger))
+    ..addCommand(GetArticleCommand(logger: errorLogger));
+
+  await app.run(arguments);
 }
-:

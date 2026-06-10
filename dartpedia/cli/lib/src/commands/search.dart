@@ -9,8 +9,7 @@ class SearchCommand extends Command {
   SearchCommand({required this.logger}) {
     addFlag(
       'im-feeling-lucky',
-      help:
-          'If true, prints the summary of the top article that the search returns.',
+      help: 'If true, prints the summary of the top article that the search returns.',
     );
   }
 
@@ -39,7 +38,7 @@ class SearchCommand extends Command {
       return 'Please include a search term';
     }
 
-    final buffer = StringBuffer('Search results:');
+    final buffer = StringBuffer('Search results:\n');
     try {
       final SearchResults results = await search(args.commandArg!);
 
@@ -60,19 +59,20 @@ class SearchCommand extends Command {
         buffer.writeln('${result.title} - ${result.url}');
       }
       return buffer.toString();
+// ... restante do código do SearchCommand ...
+
     } on HttpException catch (e) {
       logger
         ..warning(e.message)
         ..warning(e.uri)
-        ..info(usage);
+        ..info(runner.usage); // <-- CORRIGIDO AQUI (adicionado 'runner.')
       return e.message;
     } on FormatException catch (e) {
       logger
         ..warning(e.message)
         ..warning(e.source)
-        ..info(usage);
+        ..info(runner.usage); // <-- CORRIGIDO AQUI (adicionado 'runner.')
       return e.message;
     }
   }
 }
-
