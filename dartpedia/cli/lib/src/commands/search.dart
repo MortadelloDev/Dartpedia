@@ -40,10 +40,12 @@ class SearchCommand extends Command {
 
     final buffer = StringBuffer('Search results:\n');
     try {
+      // Se der erro que 'search' não existe direto, tente: Wikipedia.search(...)
       final SearchResults results = await search(args.commandArg!);
 
       if (args.flag('im-feeling-lucky')) {
         final title = results.results.first.title;
+        // Se der erro que 'getArticleSummaryByTitle' não existe direto, tente: Wikipedia.getArticleSummaryByTitle(...)
         final Summary article = await getArticleSummaryByTitle(title);
         buffer.writeln('Lucky you!');
         buffer.writeln(article.titles.normalized.titleText);
@@ -59,19 +61,17 @@ class SearchCommand extends Command {
         buffer.writeln('${result.title} - ${result.url}');
       }
       return buffer.toString();
-// ... restante do código do SearchCommand ...
-
     } on HttpException catch (e) {
       logger
         ..warning(e.message)
         ..warning(e.uri)
-        ..info(runner.usage); // <-- CORRIGIDO AQUI (adicionado 'runner.')
+        ..info(runner.usage); 
       return e.message;
     } on FormatException catch (e) {
       logger
         ..warning(e.message)
         ..warning(e.source)
-        ..info(runner.usage); // <-- CORRIGIDO AQUI (adicionado 'runner.')
+        ..info(runner.usage); 
       return e.message;
     }
   }

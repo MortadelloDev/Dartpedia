@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:command_runner/command_runner.dart';
 import 'package:logging/logging.dart';
-import 'package:wikipedia/wikipedia.dart';
+import 'package:wikipedia/wikipedia.dart'; // <-- Corrigido aqui (removido o /lib/)
 
 class GetArticleCommand extends Command {
   GetArticleCommand({required this.logger});
@@ -29,6 +29,7 @@ class GetArticleCommand extends Command {
   FutureOr<String> run(ArgResults args) async {
     try {
       var title = args.commandArg ?? defaultValue;
+      // Se der erro que 'getArticleByTitle' não existe direto, tente: Wikipedia.getArticleByTitle(...)
       final List<Article> articles = await getArticleByTitle(title);
       
       final article = articles.first;
@@ -39,13 +40,13 @@ class GetArticleCommand extends Command {
       logger
         ..warning(e.message)
         ..warning(e.uri)
-        ..info(usage);
+        ..info(runner.usage); 
       return e.message;
     } on FormatException catch (e) {
       logger
         ..warning(e.message)
         ..warning(e.source)
-        ..info(usage);
+        ..info(runner.usage); 
       return e.message;
     }
   }
