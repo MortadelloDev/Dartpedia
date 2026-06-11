@@ -12,8 +12,8 @@ Outra informações importantes sobre o cli; nosso aplicativo.
 
 Site    		:
 Autor		    : Natan do Carmo Silva <natan.do.carmo.ndc@gmail.com>
-              Talyson Morgado Almeida da Silva
-              Micael Silvestre Cacilha
+              ,Talyson Morgado Almeida da Silva
+              e Micael Silvestre Cacilha
 Manuntencão	:
 
 -------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ Versão Atual: 0.0.19
 Feito com amor e carinho por:
 
 Natan do Carmo Silva
-Talyson Morgado Almeida da Silva
-Micael Silvestre Cacilha
+,Talyson Morgado Almeida da Silva
+e Micael Silvestre Cacilha
 
 ------------------------------------------------------------------------------
