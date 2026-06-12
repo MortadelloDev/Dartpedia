@@ -59,7 +59,7 @@ Pesquisar na Wikipedia.
 
 `dart run bin/cli.dart search suapesquisaaqui`
 > [!WARNING]
-> Depois do `search` o que você quer pesquisar não deve ter espaços"
+> Depois do `search` o que você quer pesquisar não deve ter espaços
 
 ------------
 
@@ -68,7 +68,7 @@ Pesquisar artigo na Wikipedia.
 
 `dart run bin/cli.dart article suapesquisaaqui`
 > [!WARNING]
-> Depois do `article` o que você quer pesquisar não deve ter espaços"
+> Depois do `article` o que você quer pesquisar não deve ter espaços
 
 ------------
 
